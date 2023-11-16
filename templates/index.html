@@ -15,7 +15,7 @@
    text-decoration: none;
    margin: 4px 2px;
    cursor: pointer;
-   border-radius: 10px;
+   border-radius: 10px;sends the request to the ser
    width:240px;
   }
   input[type="file"] {
@@ -42,6 +42,8 @@
  <p style="font-family: 'Arial', monospace; font-size: 32px; font-weight: bold; text-decoration: underline; color: royalblue">Speed Test</p>
  <hr>
  <!-- ******************************************************************** -->
+ <!-- Download procedure begins here -->
+ <!-- ******************************************************************** -->
  <button onclick="measureDownloadSpeed()" style="font-family: 'Arial', monospace; font-size: 14px; 
  background-color: royalblue; border: none; color: white; padding: 16px 32px; 
  text-decoration: none; margin: 4px 2px; cursor: pointer; border-radius: 10px; width: 250px;">Measure Download Speed</button>
@@ -49,27 +51,28 @@
  <div style="font-family: 'Arial', monospace; font-size: 14px;height:20px;" id="downloadFileSize"></div>
  <script>
   function measureDownloadSpeed() {
-   var startTime, endTime;
+   var startTime, endTime; //Start and end time variables are defined
    var downloadSizeInBytes = 1024 * 1024 ; // 1 MB dosya
    var downloadUrl = "static/100MB.png";// İndirilecek dosyanın URL'si
-   var xhr = new XMLHttpRequest();
-   xhr.open('GET', downloadUrl, true);
+   var xhr = new XMLHttpRequest();//Request is defined
+   xhr.open('GET', downloadUrl, true);//Trigger the request to open
 
-   xhr.onreadystatechange = function () {
+   xhr.onreadystatechange = function () {//We check the status of the request's respond if it returns 2(which is request started) request is ready. If it returns 4 (request is ready) we end timer to get the value for calculating speed.
+    
     if (xhr.readyState === 2) {
      startTime = new Date().getTime();
     } else if (xhr.readyState === 4) {
      endTime = new Date().getTime();
-     var durationInSeconds = (endTime - startTime) / 1000000;
-     var downloadSpeedMbps = (downloadSizeInBytes / (1024 * 1024 )) / durationInSeconds;
-     document.getElementById("downloadResult").innerHTML = "Download Speed : " + downloadSpeedMbps.toFixed(2) + " Mbps";
-     downloadFileSize = xhr.response.length; //Bytes
-     downloadFileSize=formatFileSize(downloadFileSize,2)//Format file size and convert by format
-     document.getElementById("downloadFileSize").innerHTML = "Download File Size : " + downloadFileSize ;
+     var durationInSeconds = (endTime - startTime) / 1000000; //calculations
+     var downloadSpeedMbps = (downloadSizeInBytes / (1024 * 1024 )) / durationInSeconds; //calculations
+     document.getElementById("downloadResult").innerHTML = "Download Speed : " + downloadSpeedMbps.toFixed(2) + " Mbps"; //print operations
+     downloadFileSize = xhr.response.length; //We put the value of file size (as byte) into variable
+     downloadFileSize=formatFileSize(downloadFileSize,2)//we apply formatFileSize function here (detailly explained in line 138)
+     document.getElementById("downloadFileSize").innerHTML = "Download File Size : " + downloadFileSize ;//print operations
     }
    };
   
-   xhr.send();
+   xhr.send();//sends a request to server
   }
 
 
@@ -84,22 +87,22 @@
  <div style="font-family: 'Arial', monospace; font-size: 14px;height:20px;" id="uploadFileSize"></div>
  <script>
   function measureUploadSpeed() {
-   var startTime = new Date().getTime();
-   var fileInput = document.getElementById("fileInput");
-   var file = fileInput.files[0];
+   var startTime = new Date().getTime();//start time
+   var fileInput = document.getElementById("fileInput");//selection of file for upload operation
+   var file = fileInput.files[0];//selected file into varible
 
-   var formData = new FormData();
-   formData.append("file", file);
+   var formData = new FormData();//Variable decleration to store file
+   formData.append("file", file);//Put the file into variable
 
-   var xhr = new XMLHttpRequest();
-   xhr.open("POST", "/upload", true);
+   var xhr = new XMLHttpRequest();//New request object decleration
+   xhr.open("POST", "/upload", true);//Trigger the request to open
 
-   xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-     var endTime = new Date().getTime();
-     var duration = endTime - startTime;
-     var uploadSpeedMbps = (file.size / (1024 * 1024)) / (duration / 10000);
-     document.getElementById("uploadResult").innerHTML = "Upload Speed : " + uploadSpeedMbps.toFixed(2) + " Mbps";
+   xhr.onreadystatechange = function () { //We check the status of the request's respond 
+    if (xhr.readyState === XMLHttpRequest.DONE) {//If request is completed
+     var endTime = new Date().getTime();//end time
+     var duration = endTime - startTime;//duration calculations
+     var uploadSpeedMbps = (file.size / (1024 * 1024)) / (duration / 10000);//calculations
+     document.getElementById("uploadResult").innerHTML = "Upload Speed : " + uploadSpeedMbps.toFixed(2) + " Mbps";//print operations
     
      uploadFileSize = file.size; //Bytes
      uploadFileSize=formatFileSize(uploadFileSize,2)//Format file size and convert by format
