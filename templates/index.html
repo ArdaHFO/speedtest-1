@@ -104,14 +104,14 @@
      var uploadSpeedMbps = (file.size / (1024 * 1024)) / (duration / 10000);//calculations
      document.getElementById("uploadResult").innerHTML = "Upload Speed : " + uploadSpeedMbps.toFixed(2) + " Mbps";//print operations
     
-     uploadFileSize = file.size; //Bytes
-     uploadFileSize=formatFileSize(uploadFileSize,2)//Format file size and convert by format
-     document.getElementById("uploadFileSize").innerHTML = "Upload File Size : " + uploadFileSize ;
+     uploadFileSize = file.size; //We put the value of file size (as byte) into variable
+     uploadFileSize=formatFileSize(uploadFileSize,2)//we apply formatFileSize function here (detailly explained in line 138)
+     document.getElementById("uploadFileSize").innerHTML = "Upload File Size : " + uploadFileSize ;//print operations
     
     }
    };
 
-   xhr.send(formData);
+   xhr.send(formData);//sends a request to serve
   }
  </script>
  <!-- ******************************************************************** -->
@@ -119,23 +119,23 @@
   <button onclick="pingServer();" style="font-family: 'Arial', monospace; font-size: 14px; background-color: royalblue; border: none; color: white; padding: 16px 32px; text-decoration: none; margin: 4px 2px; cursor: pointer; border-radius: 10px; width: 250px;">Ping to the Server</button>
   <div style="font-family: 'Arial', monospace; font-size: 14px; height:20px;" id="pingResult"></div>
   <script>
-   function pingServer() {
-    var startTime = new Date().getTime();
-    var xhr = new XMLHttpRequest();
+   function pingServer() {// to calculate ping we calculate the time of request
+    var startTime = new Date().getTime();//start time
+    var xhr = new XMLHttpRequest();//New request object decleration
     xhr.onreadystatechange = function () {
-     if (xhr.readyState === XMLHttpRequest.DONE) {
-      var endTime = new Date().getTime();
-      var duration = endTime - startTime;
-      document.getElementById("pingResult").innerHTML = "Ping Speed : " + duration + " ms";
+     if (xhr.readyState === XMLHttpRequest.DONE) {//if request is completed
+      var endTime = new Date().getTime();//end time
+      var duration = endTime - startTime;//calculations
+      document.getElementById("pingResult").innerHTML = "Ping Speed : " + duration + " ms";//print operations
      }
     };
-    xhr.open("GET", "/ping", true);
-    xhr.send();
+    xhr.open("GET", "/ping", true);//trigger the request
+    xhr.send();//sends a request to serve
    }
   </script>
 
 <script>
-function formatFileSize(bytes,decimalPoint) {
+function formatFileSize(bytes,decimalPoint) {//Turn byte input file sizes into unit metric
   if(bytes == 0) return '0 Bytes';
   var k = 1000,
       dm = decimalPoint || 2,
