@@ -60,7 +60,7 @@
      startTime = new Date().getTime();
     } else if (xhr.readyState === 4) {
      endTime = new Date().getTime();
-     var durationInSeconds = (endTime - startTime) / 1000;
+     var durationInSeconds = (endTime - startTime) / 10000;
      var downloadSpeedMbps = (downloadSizeInBytes / (1024 * 1024 )) / durationInSeconds;
      document.getElementById("downloadResult").innerHTML = "Download Speed : " + downloadSpeedMbps.toFixed(2) + " Mbps";
      downloadFileSize = xhr.response.length; //Bytes
