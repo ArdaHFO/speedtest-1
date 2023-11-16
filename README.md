@@ -48,5 +48,5 @@ To Make it Work after completing all procedures for installations.
 2) python3 app.py
 
 Note: You need a 20MB file to use upload. According to our tests, the best efficient size of file for usage of upload is 20MB.
-Note 2: The following IP will work after completing the instructions: http://3.67.154.2:8000/ 
+Note 2: The following IP will work after completing the instructions: http://3.67.154.2:
 
