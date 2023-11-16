@@ -1,7 +1,5 @@
 # speedtestFinal
 
-Arda Hacıfevzioğlu S039489 & Deniz Kurt S009104
-
 speedtest final version
 This is a Cloud-Based Speed Test application done by using HTML, JS and Python. Without usign any pre-defined functions from speedtest-cli library. (.download, .upload, .ping)
 Due Date: 16.11.2023
