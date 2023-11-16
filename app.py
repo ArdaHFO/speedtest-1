@@ -26,4 +26,4 @@ def upload():
     return 'The file has been uploaded successfully: ' + file.filename
 #----------------------------------------------------------------------------------------------------   
 if __name__ == '__main__':
-    app.run(debug=True, port=80,host='0.0.0.0')
+    app.run(debug=True, port=80,host='0.0.0.0') #SSH Debug mode=ON. 0.0.0.0 allows all possible IP addresses
