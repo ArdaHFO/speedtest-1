@@ -50,7 +50,7 @@
  <script>
   function measureDownloadSpeed() {
    var startTime, endTime;
-   var downloadSizeInBytes = 1024 * 1024; // 1 MB dosya
+   var downloadSizeInBytes = 1024 * 1024 * 100; // 1 MB dosya
    var downloadUrl = "static/20MB.png";// İndirilecek dosyanın URL'si
    var xhr = new XMLHttpRequest();
    xhr.open('GET', downloadUrl, true);
@@ -61,7 +61,7 @@
     } else if (xhr.readyState === 4) {
      endTime = new Date().getTime();
      var durationInSeconds = (endTime - startTime) / 1000;
-     var downloadSpeedMbps = (downloadSizeInBytes / (1024 * 1024)) / durationInSeconds;
+     var downloadSpeedMbps = (downloadSizeInBytes / (1024 * 1024 * 100)) / durationInSeconds;
      document.getElementById("downloadResult").innerHTML = "Download Speed : " + downloadSpeedMbps.toFixed(2) + " Mbps";
      downloadFileSize = xhr.response.length; //Bytes
      downloadFileSize=formatFileSize(downloadFileSize,2)//Format file size and convert by format
